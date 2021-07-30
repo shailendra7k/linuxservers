@@ -1,2 +1,2 @@
 # linuxservers
-I create the scripts to install configure server on linux  machine.
+I create the scripts to configure server on linux  machine.

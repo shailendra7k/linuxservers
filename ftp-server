@@ -1,0 +1,42 @@
+#!/bin/sh
+rpm -q vsftpd > /dev/null 2>&1
+if [ $? -ne 0 ];
+then
+
+yum install vsftpd -y 
+kill -9 21
+systemctl restart vsftpd 
+systemctl enable vsftpd
+
+echo "Configuring ftp ..."
+cp -rp /etc/vsftpd/vsftpd.conf /etc/vsftpd/vsftpd.conf-back
+sed -i 's/anonymous_enable\=YES/anonymous_enable\=NO/' /etc/vsftpd/vsftpd.conf
+sed -i 's/local_enable\=NO/local_enable\=YES/' /etc/vsftpd/vsftpd.conf
+sed -i 's/write_enable\=NO/write_enable\=YES/' /etc/vsftpd/vsftpd.conf
+sed -i 's/dirmessage_enable\=NO/dirmessage_enable\=YES/' /etc/vsftpd/vsftpd.conf
+sed -i 's/xferlog_enable\=NO/xferlog_enable\=YES/' /etc/vsftpd/vsftpd.conf
+sed -i 's/connect_from_port_20\=NO/connect_from_port_20\=YES/' /etc/vsftpd/vsftpd.conf
+sed -i 's/xferlog_std_format\=YES/xferlog_std_format\=YES/' /etc/vsftpd/vsftpd.conf
+sed -i 's/listen\=YES/listen\=NO/' /etc/vsftpd/vsftpd.conf
+sed -i 's/listen_ipv6\=NO/listen_ipv6\=YES/' /etc/vsftpd/vsftpd.conf
+echo "userlist_enable=YES
+tcp_wrappers=YES
+userlist_file=/etc/vsftpd.userlist
+userlist_deny=NO
+chroot_local_user=YES
+allow_writeable_chroot=YES
+" >> /etc/vsftpd/vsftpd.conf
+touch /etc/vsftpd.userlist
+setsebool -P ftp_home_dir on
+semanage boolean -m ftpd_full_access --on
+systemctl restart vsftpd
+echo -e "###################################################################\n"
+echo -e "###################################################################\n"
+echo -e "\n\t confirm your installtion done properly.\n\t whenever you create a FTP user add username in ### /etc/vsftpd.userlist ### file."
+echo -e "\n\t Give shell to user according to you /bin/bash , /bin/ftp or /sbin/nologin !!\n"
+echo -e "\n\n\t\tThankyou for using: \t Created by Shailendra kumar, contact: +919602743889, Email: shailendrakumarssk@gmail.com !!!\n"
+echo -e "\n#################################################################"
+echo -e "\n#################################################################"
+else 
+echo "vsftp already installed on server."
+fi

@@ -18,7 +18,7 @@ connect_from_port_20=YES
 xferlog_std_format=YES
 listen=NO
 listen_ipv6=YES
-pam_service_name=$pam
+pam_service_name=$4
 userlist_enable=YES
 tcp_wrappers=YES
 userlist_enable=YES
@@ -50,7 +50,7 @@ if [ $os_name = "Ubuntu" ]
 				packager=apt-get
 				file_path=/etc/vsftpd.conf
 				pam=ftp
-		                ftp_server $os_name $packager $file_path
+		                ftp_server $os_name $packager $file_path $pam
 		else 
 			echo "vsftpd already installed"
 		fi
@@ -62,7 +62,7 @@ elif [ $os_name = "CentOS" ]
 				packager=yum
 				file_path=/etc/vsftpd/vsftpd.conf
 				pam=vsftpd
-				ftp_server $os_name $packager $file_path
+				ftp_server $os_name $packager $file_path $pam
 		else
 			echo "vsftpd already installed"
 		fi

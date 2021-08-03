@@ -1,3 +1,4 @@
+#!/bin/sh
 os_name=`awk -F= '/^NAME/{print $2}' /etc/*-release | cut -d \" -f2 | awk '{ print $1 }'`
 
 ftp_server(){

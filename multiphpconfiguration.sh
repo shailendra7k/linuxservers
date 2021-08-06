@@ -9,6 +9,7 @@ yum install yum-utils -y
 yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 yum install php56 php56-php-fpm -y 
 yum install php72 php72-php-fpm php72-php-gd php72-php-json php72-php-mbstring php72-php-mysqlnd php72-php-xml php72-php-xmlrpc php72-php-opcache -y 
+#yum install php72 php72-php-fpm php72-php-common php72-php-mysql php72-php-xml php72-php-xmlrpc php72-php-curl php72-php-gd php72-php-imagick php72-php-cli php72-php-dev php72-php-imap php72-php-mbstring php72-php-opcache php72-php-soap php72-php-zip php72-php-intl -y
 systemctl stop php56-php-fpm
 systemctl stop php72-php-fpm
 sed -i 's/:9000/:9056/' /etc/opt/remi/php56/php-fpm.d/www.conf

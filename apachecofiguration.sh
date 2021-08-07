@@ -75,5 +75,6 @@ sudo systemctl enable mariadb.service
 #echo "Access website http://$domain_name/info.php or http://`ifconfig  | grep inet  | grep -v '127.0.0.1' | grep -v 'inet6' | awk '{print $2 }'`/info.php"
 apacheserver
 multiphp
+database
 
-echo "configuraton doe"
+echo "configuraton done"

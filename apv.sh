@@ -6,7 +6,7 @@ then
         echo "Please Enter the domain Name to configure on Server"
         exit
 else
-        useradd $domain_name
+        useradd $domain_name -d /var/www/$domain_name/public_html
         echo $password | passwd $domain_name --stdin
 fi
 apacheserver() {
